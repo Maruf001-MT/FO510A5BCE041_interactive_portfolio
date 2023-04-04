@@ -1788,8 +1788,7 @@
     <meta name="apple-mobile-web-app-capable" content="no">
     <meta name="format-detection" content="telephone=no">
     <meta name="generator" content="spatie.be Blender CMS 2.3.5">
-    <meta name="description" content="Official site for Belgian artist Wim Delvoye">
-    <title>Welcome in Wim City &bull; wimdelvoye.be</title>
+    <title>Exhibition images &bull; wimdelvoye.be</title>
     <link href="//fonts.googleapis.com/css?family=Source+Sans+Pro:200,400,700,900,400italic,700italic" rel="stylesheet" type="text/css">
     <script type="text/javascript" src="//use.typekit.net/wws7bgz.js"></script>
     <script type="text/javascript">
@@ -1801,7 +1800,7 @@
     <script src="modules/front/javascript/head/modernizr2.6.2.min.js"></script>
 </head>
 
-<body data-page="home">
+<body data-page="">
 
     <!--[if lt IE 8]>
 <p class="is-oldbrowser">
@@ -1813,11 +1812,12 @@
 
     <header id="header">
         <div class="socials">
-
+            <a href="https://www.instagram.com/wimdelvoye/"><i class="icon-instagram"></i></a>
+            <a href="https://www.facebook.com/StudioWimDelvoye/"><i class="icon-facebook"></i></a>
         </div>
         <div class="container">
             <div class="logo">
-                <h1><a href="/">SOULNAVE</a></h1>
+                <h1><a href="/">Wim <span>Delvoye</span></a></h1>
             </div>
             <div class="responsive-menu-con">
                 <a href="#" class="responsive-menu resp-menu"><i class="icon-menu"></i> MENU</a>
@@ -1827,728 +1827,348 @@
                 <div class="menu-bar">
                     <div class="menu-table">
                         <ul class="navigation">
+                            <li>
+                                <a class="home" href="/">Home</a>
+                            </li>
                             <li class="active">
-                                <a class="home" href="#">Home</a>
+                                <a class="work" href="/work/">Work</a>
                             </li>
                             <li>
-                                <a class="work" href="#">Work</a>
+                                <a href="/about/">About</a>
                             </li>
                             <li>
-                                <a href="#">About</a>
+                                <a href="/news/">News</a>
                             </li>
                             <li>
-                                <a href="#">News</a>
-                            </li>
-                            <li>
-                                <a class="contact" href="#">Contact</a>
+                                <a class="contact" href="/contact/">Contact</a>
                             </li>
                         </ul>
                     </div>
                 </div>
             </nav>
-
+            <form class="search" data-behaviour="search">
+                <span class="search-field">
+                        <input type="search" name="query" placeholder="Search"></span>
+                <button class="search-button">
+                <i class="icon-search"></i>
+            </button>
+            </form>
         </div>
         <div class="bordered"></div>
     </header>
     <hr class="visuallyhidden">
     <div class="content">
-        <style>
-            * {
-                position: relative;
-                box-sizing: border-box;
-            }
 
-            html {
-                overflow-x: hidden;
-            }
-
-            body[data-page="home"] {
-                margin: 0;
-                padding: 0;
-                width: 100%;
-                height: auto;
-            }
-
-            .wimcity {
-                width: 100%;
-                min-height: 100vh;
-                margin-top: 80px;
-                overflow-x: hidden;
-            }
-
-            @media (max-width: 960px) {
-                .wimcity {
-                    margin-top: 50px;
-                }
-            }
-
-            .buildings {
-                position: relative;
-                z-index: 1;
-                left: 50%;
-            }
-
-            .streets {
-                position: absolute;
-                z-index: 0;
-                width: 100%;
-                height: 100%;
-                overflow: hidden;
-                top: 0;
-                left: 0;
-            }
-
-            .streets-artwork {
-                position: absolute;
-                height: 100%;
-                top: 0;
-                left: 50%;
-                background-repeat: repeat;
-                background-position: top left;
-            }
-
-            .wimcity img {
-                display: block;
-                image-rendering: optimizeSpeed;
-                /* Legal fallback */
-                image-rendering: -moz-crisp-edges;
-                /* Firefox        */
-                image-rendering: -o-crisp-edges;
-                /* Opera          */
-                image-rendering: -webkit-optimize-contrast;
-                /* Safari         */
-                image-rendering: optimize-contrast;
-                /* CSS3 Proposed  */
-                image-rendering: crisp-edges;
-                /* CSS4 Proposed  */
-                image-rendering: pixelated;
-                /* CSS4 Proposed  */
-                -ms-interpolation-mode: nearest-neighbor;
-                /* IE8+           */
-            }
-
-            .tiles {
-                position: relative;
-                width: 100%;
-                height: auto;
-            }
-
-            .tile {
-                position: relative;
-                float: left;
-            }
-
-            .tile-number {
-                top: 200px;
-                font-size: 50px;
-                color: black;
-                text-align: center;
-            }
-
-            .tile-grid {
-                width: 100%;
-                height: 100%;
-                position: absolute;
-                top: 0;
-                left: 0;
-                display: block;
-            }
-
-            .tile-grid img {
-                width: 100%;
-                height: 100%;
-            }
-
-            .building {
-                position: absolute;
-                left: 114px;
-                bottom: 0;
-                width: 540px;
-                /* ASSUMING 540 wide! */
-                height: auto;
-                display: none;
-                -webkit-transition: all 0.75s ease;
-                -moz-transition: all 0.75s ease;
-                -o-transition: all 0.75s ease;
-                -ms-transition: all 0.75s ease;
-                transition: all 0.75s ease;
-            }
-
-            .building-focus {
-                /* outline: 1px red solid; */
-            }
-
-            .building-focus .building-transparent {
-                z-index: 2000;
-            }
-
-            .building img {
-                width: 100%;
-                height: auto;
-            }
-
-            .building-transparent {
-                opacity: 0;
-                position: absolute;
-                top: 0;
-                left: 0;
-                z-index: 2;
-            }
-
-            .wimcity-admin .building img {
-                outline: solid 1px white;
-            }
-
-            .building-loaded-first {
-                display: block;
-                -webkit-animation: drop .5s 1 ease-in;
-                /* Safari 4+ */
-                -moz-animation: drop .5s 1 ease-in;
-                /* Fx 5+ */
-                -o-animation: drop .5s 1 ease-in;
-                /* Opera 12+ */
-                animation: drop .5s 1 ease-in;
-                /* IE 10+, Fx 29+ */
-            }
-
-            .building-loaded {
-                display: block;
-            }
-
-            /*-- @1x --*/
-
-            .tile {
-                width: 768px;
-                height: 384px;
-            }
-
-            /*--1537 and up--*/
-
-            @media (min-width: 1537px) {
-                .buildings {
-                    width: 1920px;
-                    margin-left: -960px;
-                }
-                .streets-artwork {
-                    width: 300%;
-                    margin-left: -2496px;
-                    /*960 + 2*768 extra marge*/
-                }
-                .tile:nth-child(n + 3) {
-                    margin-top: -192px;
-                }
-                .tile:nth-child(4n + 3) {
-                    margin-left: 384px;
-                }
-            }
-
-            /*--to 1536--*/
-
-            @media (min-width: 1153px) and (max-width: 1536px) {
-                .buildings {
-                    width: 1536px;
-                    margin-left: -768px;
-                }
-                .streets-artwork {
-                    width: 200%;
-                    margin-left: -768px;
-                }
-                .tile:nth-child(n + 3) {
-                    margin-top: -192px;
-                }
-                .tile:nth-child(3n + 3) {
-                    margin-left: 384px;
-                }
-            }
-
-            /*--to 1152--*/
-
-            @media (min-width: 769px) and (max-width: 1152px) {
-                .buildings {
-                    width: 1152px;
-                    margin-left: -576px;
-                }
-                .streets-artwork {
-                    width: 200%;
-                    margin-left: -576px;
-                }
-                .tile:nth-child(n + 2) {
-                    margin-top: -192px;
-                }
-                .tile:nth-child(2n + 2) {
-                    margin-left: 384px;
-                }
-            }
-
-            /*--to 768--*/
-
-            @media (max-width: 768px) {
-                .buildings {
-                    width: 768px;
-                    margin-left: -384px;
-                }
-                .streets-artwork {
-                    width: 200%;
-                    margin-left: -384px;
-                }
-                .tile-wasteland {
-                    display: none;
-                }
-            }
-
-            /*-- @2x --*/
-
-            @media (-webkit-min-device-pixel-ratio: 1.5), (min-resolution: 144dpi) {
-                .tile {
-                    width: 384px !important;
-                    height: 192px !important;
-                    /*reset margins*/
-                    margin-left: 0 !important;
-                    margin-top: 0 !important;
-                }
-                .tile-number {
-                    top: 100px !important;
-                    font-size: 25px !important;
-                }
-                .streets-artwork {
-                    background-size: 384px auto !important;
-                }
-                .building {
-                    left: 57px;
-                    width: 270px;
-                }
-            }
-
-            /*--769 and up--*/
-
-            @media (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 769px),
-            (min-resolution: 144dpi) and (min-width: 769px) {
-                .buildings {
-                    width: 960px !important;
-                    margin-left: -480px !important;
-                }
-                .streets-artwork {
-                    margin-left: -1248px !important;
-                    /* 480 + 2*384 extra marge*/
-                }
-                .tile:nth-child(n + 3) {
-                    margin-top: -96px !important;
-                }
-                .tile:nth-child(4n + 3) {
-                    margin-left: 192px !important;
-                }
-            }
-
-            /*--to 768--*/
-
-            @media (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 577px) and (max-width: 768px),
-            (min-resolution: 144dpi) and (min-width: 577px) and (max-width: 768px) {
-                .buildings {
-                    width: 768px !important;
-                    margin-left: -384px !important;
-                }
-                .streets-artwork {
-                    margin-left: -384px !important;
-                }
-                .tile-wasteland {
-                    display: block !important;
-                }
-                .tile:nth-child(n + 3) {
-                    margin-top: -96px !important;
-                }
-                .tile:nth-child(3n + 3) {
-                    margin-left: 192px !important;
-                }
-            }
-
-            /*--to 576--*/
-
-            @media (-webkit-min-device-pixel-ratio: 1.5) and (min-width: 385px) and (max-width: 576px),
-            (min-resolution: 144dpi) and (min-width: 385px) and (max-width: 576px) {
-                .buildings {
-                    width: 576px !important;
-                    margin-left: -288px !important;
-                }
-                .streets-artwork {
-                    margin-left: -288px !important;
-                }
-                .tile-wasteland {
-                    display: block !important;
-                }
-                .tile:nth-child(n + 2) {
-                    margin-top: -96px !important;
-                }
-                .tile:nth-child(2n + 2) {
-                    margin-left: 192px !important;
-                }
-            }
-
-            /*--to 384--*/
-
-            @media (-webkit-min-device-pixel-ratio: 1.5) and (max-width: 384px),
-            (min-resolution: 144dpi) and (max-width: 384px) {
-                .buildings {
-                    width: 384px !important;
-                    margin-left: -192px !important;
-                }
-                .streets-artwork {
-                    margin-left: -192px !important;
-                }
-                .tile-wasteland {
-                    display: none !important;
-                }
-            }
-
-            /* animations */
-
-            @-webkit-keyframes drop {
-                0% {
-                    -webkit-transform: translateY(-100vh) scale(1, 1.1);
-                }
-                60% {
-                    -webkit-transform: translateY(0px) scale(1, 1);
-                }
-                70% {
-                    -webkit-transform: translateY(6px) scale(1, 0.96);
-                }
-                80% {
-                    -webkit-transform: translateY(-3px) scale(1, 1.03);
-                }
-                90% {
-                    -webkit-transform: translateY(2px) scale(1, 0.98);
-                }
-                100% {
-                    -webkit-transform: translateY(0px) scale(1, 1);
-                }
-            }
-
-            @-moz-keyframes drop {
-                0% {
-                    -moz-transform: translateY(-100vh) scale(1, 1.1);
-                }
-                60% {
-                    -moz-transform: translateY(0px) scale(1, 1);
-                }
-                70% {
-                    -moz-transform: translateY(6px) scale(1, 0.96);
-                }
-                80% {
-                    -moz-transform: translateY(-3px) scale(1, 1.03);
-                }
-                90% {
-                    -moz-transform: translateY(2px) scale(1, 0.98);
-                }
-                100% {
-                    -moz-transform: translateY(0px) scale(1, 1);
-                }
-            }
-
-            @-o-keyframes drop {
-                0% {
-                    -o-transform: translateY(-100vh) scale(1, 1.1);
-                }
-                60% {
-                    -o-transform: translateY(0px) scale(1, 1);
-                }
-                70% {
-                    -o-transform: translateY(6px) scale(1, 0.96);
-                }
-                80% {
-                    -o-transform: translateY(-3px) scale(1, 1.03);
-                }
-                90% {
-                    -o-transform: translateY(2px) scale(1, 0.98);
-                }
-                100% {
-                    -o-transform: translateY(0px) scale(1, 1);
-                }
-            }
-
-            @keyframes drop {
-                0% {
-                    transform: translateY(-100vh) scale(1, 1.1);
-                }
-                60% {
-                    transform: translateY(0px) scale(1, 1);
-                }
-                70% {
-                    transform: translateY(6px) scale(1, 0.96);
-                }
-                80% {
-                    transform: translateY(-3px) scale(1, 1.03);
-                }
-                90% {
-                    transform: translateY(2px) scale(1, 0.98);
-                }
-                100% {
-                    transform: translateY(0px) scale(1, 1);
-                }
-            }
-        </style>
-        <div class="wimcity ">
-            <div class="buildings">
-                <div class="tiles group">
-
-                    <div class="tile ">
-
-
-                        <div class="building building-linked">
-                         </div>
-
-
+        <div class="banner banner-loader">
+            <div class="banner-parallax">
+                <figure class="banner-visual">
+                    <div class="img-banner">
+                        <div class="img-con" data-background="/medialibrary/cache/bannerretina/bigImage/2ed1e8fc-c96b-3ae0-b46a-ffbe62ff78b4_1782.jpg?t=20141202125754" style="background-image:url('/medialibrary/cache/bannerretina/bigImage/2ed1e8fc-c96b-3ae0-b46a-ffbe62ff78b4_1782.jpg?t=20141202125754')">
+                        </div>
                     </div>
-
-
-                    <div class="tile ">
-
-
-                        
-
-
-                    </div>
-
-
-                    <div class="tile ">
-
-
-                        <div class="building building-linked">
-                            <img class="building-actual" alt="Foundry works" src="medialibrary/cache/original/primaryImage/372d00a1-9b3c-3491-a510-54752dcc7bc5_1905.png"><img class="building-transparent" src="medialibrary/cache/original/primaryImage/372d00a1-9b3c-3491-a510-54752dcc7bc5_1905.png"
-                                usemap="#Map3"><map name="Map3" id="Map3"><area title="Foundry" href="#" shape="poly" coords="75,280,258,373,475,290,475,208,342,135,318,26,282,5,193,32,161,81,144,88,73,146"></map></div>
-
-
-                    </div>
-
-
-                    <div class="tile ">
-
-
-                        <div class="building building-linked">
-                            <img class="building-actual" alt="Cloaca" src="medialibrary/cache/original/primaryImage/contact.png"><img class="building-transparent" src="medialibrary/cache/original/primaryImage/contact.png"
-                                usemap="#Map4"><map name="Map4" id="Map4"><area title="Cloaca" href="#" shape="poly" coords="302,3,252,29,201,53,165,86,105,103,22,133,39,199,266,321,513,199,456,98"></map></div>
-
-
-                    </div>
-
-
-                    <div class="tile ">
-
-
-                        <div class="building building-linked">
-                            <img class="building-actual" alt="Gothic works" src="medialibrary/cache/original/primaryImage/work.png"><img class="building-transparent" src="medialibrary/cache/original/primaryImage/work.png"
-                                usemap="#Map5"><map name="Map5" id="Map5"><area title="Gothic works" href="#" shape="poly" coords="338,112,409,151,458,159,515,113,537,140,528,164,488,184,486,260,530,302,523,323,484,342,484,376,501,422,521,447,493,458,390,506,267,569,176,528,58,468,17,445,29,334,168,310,327,278,375,219,308,140,320,121,330,114"></map></div>
-
-
-                    </div>
-
-
-                    <div class="tile ">
-
-
-                        <div class="building building-linked">
-                            <img class="building-actual" alt="Exhibition images" src="medialibrary/cache/original/primaryImage/home.png"><img class="building-transparent" src="medialibrary/cache/original/primaryImage/home.png"
-                                usemap="#Map6"><map name="Map6" id="Map6"><area title="Expo" href="#" shape="poly" coords="54,70,51,100,51,122,89,137,119,150,119,169,119,176,127,210,125,255,117,293,127,332,47,443,248,534,418,494,477,457,480,360,357,245,338,201,339,73,218,45"></map></div>
-
-
-                    </div>
-
-
-                    <div class="tile ">
-
-
-                        <div class="building building-linked">
-                            <img class="building-actual" alt="Goals" src="medialibrary/cache/original/primaryImage/fe3da4b2-a54b-3372-bd25-42c6da7df121_1902.png"><img class="building-transparent" src="medialibrary/cache/original/primaryImage/fe3da4b2-a54b-3372-bd25-42c6da7df121_1902.png"
-                                usemap="#Map7"><map name="Map7" id="Map7"><area title="Goals" href="#" shape="poly" coords="38,144,270,261,505,137,498,113,273,4,259,27,194,59,193,25,112,62,101,99,62,124,42,117"></map></div>
-
-
-                    </div>
-
-
-                    <div class="tile ">
-
-
-                        <div class="building building-linked">
-                            <img class="building-actual" alt="Early Works &mdash; Delft &mdash; Birdhouses" src="medialibrary/cache/original/primaryImage/instagram.png"><img class="building-transparent" src="medialibrary/cache/original/primaryImage/instagram.png"
-                                usemap="#Map8"><map name="Map8" id="Map8"><area title="Early works" href="#" shape="poly" coords="155,89,303,171,305,252,353,284,357,306,271,348,51,248,51,142"><area title="Delft" href="#" shape="poly" coords="271,13,227,63,156,133,21,198,267,318,511,199,428,152,340,118,315,54,312,21,318,25" ></map></div>
-
-
-                    </div>
-
-
-                   
-
-
-                    <div class="tile ">
-
-
-                        <div class="building building-linked">
-                            <img class="building-actual" alt="X-rays + altas" src="medialibrary/cache/original/primaryImage/facebook.png"><img class="building-transparent" src="medialibrary/cache/original/primaryImage/facebook.png"
-                                usemap="#Map10"><map name="Map10" id="Map10"><area title="X-rays" href="#" shape="poly" coords="284,21,247,56,220,88,190,121,30,202,267,321,509,203,377,134,315,53"></map></div>
-
-
-                    </div>
-
-
-                  
-
-
-                    <div class="tile ">
-
-
-                        <div class="building building-linked">
-                            <img class="building-actual" alt="Rorschach-suitcase-rabbitslippers" src="medialibrary/cache/original/primaryImage/made_by.png"><img class="building-transparent" src="medialibrary/cache/original/primaryImage/made_by.png"
-                                usemap="#Map12"><map name="Map12" id="Map12"><area title="Rabbitslippers" href="#" shape="poly" coords="177,194,94,239,23,205,25,189,154,127"><area title="Rorschach" href="#" shape="poly" coords="103,242,187,203,154,119,155,21,250,5,347,54,343,125,329,211,340,304,273,327"><area title="Suitcases" href="#" shape="poly" coords="359,19,339,71,340,213,400,258,522,202,520,187,473,50,402,0"></map></div>
-
-
-                    </div>
-
-
-
-
-                 
-
-
-                    
-
-
-                   
-
-
-                    <div class="tile tile-wasteland">
-
-                    </div>
-
-
-                    
-
-
-
-
-
-
-                </div>
+                    <figcaption>
+                        <div class="container">
+                            <h1>Exhibition images</h1>
+                            <p></p>
+                        </div>
+                    </figcaption>
+                </figure>
             </div>
+        </div>
+        <div class="projects">
+            <div class="container">
+                <div class="back-link">
+                    <a class="back-link btn" href="/work/"><i class="icon-left-small"></i> Back to all work</a>
 
-            <div class="streets">
-                <div class="streets-artwork" data-background="medialibrary/cache/original/primaryImage/1129b16a-ac33-3834-a484-25a0578cc886_2174.png">
                 </div>
             </div>
         </div>
 
-        <style>
-            .callout {
-                position: fixed;
-                bottom: 35px;
-                left: 20px;
-                margin-left: 20px;
-                z-index: 3;
-                border-style: solid;
-                border-width: 1px;
-            }
-
-            .callout-header {
-                padding: 0px 15px;
-                background: white;
-                font-size: 17px;
-                color: black;
-                padding-top: 15px;
-            }
-
-            .callout-header h1 {
-                margin: 0px !important;
-            }
-
-            .callout-container {
-                padding: 15px;
-                background-color: white;
-                color: black
-            }
-
-            .closebtn {
-                position: absolute;
-                top: -10px;
-                right: 15px;
-                color: white;
-                font-size: 30px;
-                cursor: pointer;
-                color: black;
-            }
-
-            .closebtn:hover {
-                color: lightgrey;
-            }
-
-            input[type=email] {
-                -webkit-appearance: none;
-                text-align: left;
-                color: #6e6e6e;
-                border: 0 solid #fff;
-                background: #fff;
-                line-height: 2.5em;
-                padding: 0 .5em;
-                width: 90%;
-                font-size: .8em;
-                -webkit-border-radius: 0;
-                border-radius: 0;
-                -webkit-box-sizing: border-box;
-                box-sizing: border-box;
-                -webkit-transition: all .3s ease-out;
-                transition: all .3s ease-out;
-            }
-
-            #mc-embedded-subscribe {
-                font-size: .8em;
-                background: #000;
-                color: #fff;
-                margin: 0 !important;
-                width: 2.5em;
-                position: absolute;
-                border: 0;
-                right: 0;
-                top: 0;
-                bottom: 0;
-                -webkit-appearance: none;
-                float: right;
-            }
-
-            .newsletterform {
-                vertical-align: middle;
-                border: 2px solid #000;
-                -webkit-box-shadow: 1px 1px 0 #000, 2px 2px 0 #000;
-                box-shadow: 1px 1px 0 #000, 2px 2px 0 #000;
-                -webkit-transition: all .3s ease;
-                transition: all .3s ease;
-            }
-        </style>
-
-        <hr class="visuallyhidden">
-        <footer>
+        <div class="feed-con project-feed">
             <div class="container">
-                <small>
+                <div id="feed">
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/royal-museums-of-fine-arts-belgium-2019/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/96d40bab-e43a-334f-8408-452246e71f57_2846_3685.jpg?t=20190410122331" alt=""></picture>
+                                <figcaption>
+                                    <h2>Royal Museums of Fine Arts, Belgium, 2019</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/perrotin-shanghai-cn-2018/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/8e7f7857-a1bf-38fc-a766-3069ae853709_2668_3498.jpg?t=20180921101008" alt=""></picture>
+                                <figcaption>
+                                    <h2>Perrotin Shanghai, CN (2018)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/gary-tatintsian-gallery-moscow-ru-2018/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/30a698a3-f85e-3629-b695-fd6c8549d134_2748_3588.jpg?t=20181127111401" alt=""></picture>
+                                <figcaption>
+                                    <h2>Gary Tatintsian Gallery, Moscow (RU), 2018</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/muse-tinguely-ch-2017/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/c86ddd6b-43cf-3a58-bf9e-9c9b9753f187_2631_3464.jpg?t=20180920110308" alt=""></picture>
+                                <figcaption>
+                                    <h2>Mus&eacute;e Tinguely, CH (2017)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/dhc-art-montral-2016/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/d6cdd350-dbfe-37f3-a829-664689c1f8c2_2113_2691.jpg?t=20170127022249" alt=""></picture>
+                                <figcaption>
+                                    <h2>DHC/ ART, Montr&eacute;al (2016)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/mudam-luxembourg-2016/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/6af054e0-da0a-3cbc-b624-7a70b435be56_2044_2625.jpg?t=20160714011414" alt=""></picture>
+                                <figcaption>
+                                    <h2>MUDAM, Luxembourg (2016)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/tmoca-tehran-2016/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/75e56aee-405f-3d37-b1d2-87d42ea9ede3_2082_2659.jpg?t=20160714043808" alt=""></picture>
+                                <figcaption>
+                                    <h2>TMoCA, Tehran (2016)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/heydar-aliyev-center-baku-2015/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/01ca2522-0960-3d0c-b4dc-0cb6381f28f6_1940_2526.jpg?t=20150420022335" alt=""></picture>
+                                <figcaption>
+                                    <h2>Heydar Aliyev center, Baku (2015)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/mimicry-wim-delvoye-at-the-pushkin-state-museum-of-fine-art-moscow-2014/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/5f88e84e-864e-39f4-bed3-2b60762ace35_1626.jpg?t=20141128120458" alt=""></picture>
+                                <figcaption>
+                                    <h2>Mimicry: Wim Delvoye at the Pushkin State Museum of Fine Art, Moscow (2014)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/galerie-emmanuel-perrotin-paris-2014/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/3fe3d4aa-5430-36b1-b00c-be28ec52b689_1648.jpg?t=20141128122610" alt=""></picture>
+                                <figcaption>
+                                    <h2>Galerie Emmanuel Perrotin, Paris (2014)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/abu-dhabi-art-fair-abu-dhabi-2014/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/e0a488f3-0608-3aca-879b-66d89e8830fd_1653.jpg?t=20141128013316" alt=""></picture>
+                                <figcaption>
+                                    <h2>Abu Dhabi Art Fair, Abu Dhabi (2014)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/gary-tatintsian-gallery-moscow-2014/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/6a3726da-cdb5-33bb-bd50-2bba3cfdbb6d_1659.jpg?t=20141128023244" alt=""></picture>
+                                <figcaption>
+                                    <h2>Gary Tatintsian Gallery, Moscow (2014)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/art-dubai-dubai-2013/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/72e7ba3e-7308-3d64-9b69-d33150a6cb45_1680.jpg?t=20141201103725" alt=""></picture>
+                                <figcaption>
+                                    <h2>Art Dubai, Dubai (2013)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/art-istanbul-istanbul-2013/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/a3be7d67-68dc-3b92-b9d7-dc1a48c126b3_1684.jpg?t=20141201102929" alt=""></picture>
+                                <figcaption>
+                                    <h2>Art Istanbul, Istanbul (2013)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/chiesa-di-san-cristoforo-lucca-2013/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/8a0b449b-6e17-3d90-8bb0-841676836875_1698.jpg?t=20141201112413" alt=""></picture>
+                                <figcaption>
+                                    <h2>Chiesa di San Cristoforo, Lucca (2013)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/sperone-westwater-new-york-2013/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/06b67412-a443-3825-8db7-8bda808252b3_1701.jpg?t=20141201115421" alt=""></picture>
+                                <figcaption>
+                                    <h2>Sperone Westwater, New York (2013)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/wim-delvoye-au-louvre-paris-2012/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/41d1ebb3-f033-393d-9cbb-03b4dd86cae8_1726.jpg?t=20141201025511" alt=""></picture>
+                                <figcaption>
+                                    <h2>Wim Delvoye au Louvre, Paris (2012)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/wim-delvoye-rorschach-galerie-emmanuel-perrotin-paris-2012/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/0f1c1359-6b1b-3051-a3da-c7b00e821067_1736.jpg?t=20141201041034" alt=""></picture>
+                                <figcaption>
+                                    <h2>Wim Delvoye "Rorschach", Galerie Emmanuel Perrotin, Paris (2012)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/st-jan-st-bavo-cathedral-ghent-2012/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/ca53c5ff-405b-3d4a-8477-415b19e45c02_1745.jpg?t=20141201044644" alt=""></picture>
+                                <figcaption>
+                                    <h2>St.-Jan, St.-Bavo Cathedral, Ghent (2012)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/mona-hobart-tasmania-2011/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/5b1d7adc-bd56-3816-b938-9094ad6060cf_1756.jpg?t=20141202115449" alt=""></picture>
+                                <figcaption>
+                                    <h2>MONA, Hobart, Tasmania (2011)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/galerie-urs-meile-beijing-2011/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/1bf51b48-14d3-3295-b301-2dc4e449675d_1773.jpg?t=20141202125447" alt=""></picture>
+                                <figcaption>
+                                    <h2>Galerie Urs Meile, Beijing (2011)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/knocking-on-heavens-door-bozar-brussels-2010/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/f2c152ed-9726-3d84-8a79-83ddc50899ed_1783.jpg?t=20141202034835" alt=""></picture>
+                                <figcaption>
+                                    <h2>Knocking on Heaven's Door, BOZAR, Brussels (2010)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/wim-delvoye-dessins-maquettes-mamac-nice-2010/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/9d046d0d-4867-312c-ad5d-1a321bceb4b1_1794.jpg?t=20141202044357" alt=""></picture>
+                                <figcaption>
+                                    <h2>Wim Delvoye "Dessins &amp; Maquettes", MAMAC, Nice (2010)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/wim-delvoye-at-muse-rodin-paris-2010/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/6f2926c7-dac1-36a9-a0b3-e9ce41d1ccc1_1801.jpg?t=20141203091825" alt=""></picture>
+                                <figcaption>
+                                    <h2>Wim Delvoye at Mus&eacute;e Rodin, Paris (2010)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                    <div class="feed-block">
+                        <a href="/work/exhibition-images/galerie-emmanuel-perrotin-paris-2007/">
+                            <figure>
+                                <picture><img src="medialibrary/cache/projectthumbretina/media/6913b5a9-bbdc-39f2-9cc0-76bbc8bea0fc_1806.jpg?t=20141203110302" alt=""></picture>
+                                <figcaption>
+                                    <h2>Galerie Emmanuel Perrotin, Paris (2007)</h2>
+                                </figcaption>
+                            </figure>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <hr class="visuallyhidden">
+    <footer>
+        <div class="container">
+            <small>
             &copy; 2023 &bull; <a href="https://spatie.be">spatie.be webdesign, Antwerpen</a>
         </small>
-            </div>
-        </footer>
-        <div class="toplink" id="toplink"><i class="icon-up-big"></i></div>
-        <script src="gulp/front.defer.53f0cbdd.js"></script>
-        <!-- Google Tag Manager --><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WJ3SRJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
-        <script>
-            (function(w, d, s, l, i) {
-                w[l] = w[l] || [];
-                w[l].push({
-                    'gtm.start': new Date().getTime(),
-                    event: 'gtm.js'
-                });
-                var f = d.getElementsByTagName(s)[0],
-                    j = d.createElement(s),
-                    dl = l != 'dataLayer' ? '&l=' + l : '';
-                j.async = true;
-                j.src =
-                    '//www.googletagmanager.com/gtm.js?id=' + i + dl;
-                f.parentNode.insertBefore(j, f);
-            })(window, document, 'script', 'dataLayer', 'GTM-WJ3SRJ');
-        </script>
-        <!-- End Google Tag Manager -->
-    </div>
+        </div>
+    </footer>
+    <div class="toplink" id="toplink"><i class="icon-up-big"></i></div>
+    <script src="gulp/front.defer.53f0cbdd.js"></script>
+    <!-- Google Tag Manager --><noscript><iframe src="//www.googletagmanager.com/ns.html?id=GTM-WJ3SRJ" height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+    <script>
+        (function(w, d, s, l, i) {
+            w[l] = w[l] || [];
+            w[l].push({
+                'gtm.start': new Date().getTime(),
+                event: 'gtm.js'
+            });
+            var f = d.getElementsByTagName(s)[0],
+                j = d.createElement(s),
+                dl = l != 'dataLayer' ? '&l=' + l : '';
+            j.async = true;
+            j.src =
+                '//www.googletagmanager.com/gtm.js?id=' + i + dl;
+            f.parentNode.insertBefore(j, f);
+        })(window, document, 'script', 'dataLayer', 'GTM-WJ3SRJ');
+    </script>
+    <!-- End Google Tag Manager -->
     <script type="text/javascript">
         window.NREUM || (NREUM = {});
         NREUM.info = {
@@ -2557,7 +2177,7 @@
             "applicationID": "4520422",
             "transactionName": "b1RaNUJQDEoFUEELV1YebRNZHgtXAFZNTEhQQQ==",
             "queueTime": 0,
-            "applicationTime": 18,
+            "applicationTime": 17,
             "atts": "QxNZQwpKH0Q=",
             "errorBeacon": "bam.nr-data.net",
             "agent": ""
